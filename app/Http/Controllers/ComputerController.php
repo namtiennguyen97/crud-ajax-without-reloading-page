@@ -47,10 +47,10 @@ class ComputerController extends Controller
     }
 
     public function delete($id){
-//       $computer = Computer::destroy($id);
+      Computer::destroy($id);
 
-        $computer = Computer::findOrFail($id);
-        $computer->delete();
+//        $computer = Computer::findOrFail($id);
+//        $computer->delete();
 
 //
 //        return response()->json([

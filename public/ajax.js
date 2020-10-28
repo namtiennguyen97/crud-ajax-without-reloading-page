@@ -49,6 +49,8 @@ $(document).ready(function (){
             success: function (data){
                setTimeout(function (){
                     $('#confirmDeletion').modal('show');
+                    // $('#mainTable').reload();
+                   location.reload();
                }, 1000);
             }
 
