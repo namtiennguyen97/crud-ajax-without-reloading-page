@@ -4,7 +4,7 @@
 
 
 // show detail information
-$(document).ready(function (){
+
 
     $('.showDetail').click(function (data){
         let id = $('.showDetail').val($(this).data('id'));
@@ -21,7 +21,7 @@ $(document).ready(function (){
         });
 
     });
-});
+
 
 
 
@@ -33,7 +33,26 @@ $('.updateComputer').click(function (){
 
 
 //Delete data
-$(document).ready(function (e){
-    e.preventDefault();
+$(document).ready(function (){
+    let com_id;
+    $('.showDelConfirm').click(function (){
+        com_id = $(this).data('id');
+        $('#confirmDeletion').modal('show');
+    });
+    $('#confirmDelete').click(function (){
 
+        $.ajax({
+           url: 'delete/'+ com_id,
+           beforeSend: function (){
+               $('#confirmDelete').text('Deleting...');
+           },
+            success: function (data){
+               setTimeout(function (){
+                    $('#confirmDeletion').modal('show');
+               }, 1000);
+            }
+
+        });
+    });
 });
+

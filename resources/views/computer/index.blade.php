@@ -33,36 +33,12 @@ Computer available now: {{count($computer)}}
         <td>{{$value->price}}</td>
         <td><a class="showDetail btn btn-warning fa fa-eye" aria-hidden="true" data-id="{{$value->id}}"></a></td>
         <td><a class="updateComputer btn btn-success fa fa-pencil-square-o" data-id="{{$value->id}}" ></a></td>
-        <td><a class="btn btn-danger fa fa-trash" href="{{route('computer.delete', $value->id)}}" data-id="{{$value->id}}" id="deleteCom"></a></td>
+        <td><a class="showDelConfirm btn btn-danger fa fa-trash" data-id="{{$value->id}}" id="showConfirmDel"></a></td>
     </tr>
     @endforeach
 </table>
 
-<script>
-    $('#deleteCom').click(function (){
-         let id = $('#idCom').val();
-        $.ajax(
-            {
-                url: " "+id,
-                method: 'get', // replaced from put
-                // dataType: "JSON",
-                data: {
-                    "id": id // method and token not needed in data
-                },
-                success: function (response)
-                {
-                    alert('deleted');
-                    location.reload();
-                    console.log(response);
-                },
-                error: function(xhr) {
-                    alert('cant delete');
-                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
-                    // do something here because of error
-                }
-            });
-    });
-</script>
+
 <!-- Button trigger modal -->
 <a id="showModal" type="button" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
     Add new Computer/Modal
@@ -178,7 +154,7 @@ Computer available now: {{count($computer)}}
 </div>
 
 {{--Delete question modal--}}
-<div class="modal modal-danger" id="deleteModal" data-backdrop="static" data-keyboard="false" tabindex="-1">
+<div class="modal modal-danger" id="confirmDeletion" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -194,7 +170,7 @@ Computer available now: {{count($computer)}}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="confirmDelete">Confirm Delete</button>
+                <button type="button" class="btn btn-primary" id="confirmDelete" >Confirm Delete</button>
             </div>
         </div>
     </div>
@@ -223,7 +199,7 @@ Computer available now: {{count($computer)}}
 </div>
 <script src="{{asset('ajax.js')}}"></script>
 
-
+{{--Script add--}}
     <script>
         $('#addComputerModal').click(function (e){
             e.preventDefault();
@@ -243,7 +219,7 @@ Computer available now: {{count($computer)}}
                         "<td>"+ data.price+ "</td>" +
                         "<td>"+ "<a id='detailCom' class='btn btn-warning fa fa-eye' aria-hidden='true' data-id='data.id' data-toggle='modal' data-target='#computerDetail'></a>" + "</td>" +
                         "<td>"+"<a id='#updateComputer' class='btn btn-success fa fa-pencil-square-o' data-id='data.id' data-toggle='modal' data-target='#modalUpdate'></a>" + "</td>" +
-                        "<td>"+ "<a class='btn btn-danger fa fa-trash' id='#deleteCom' data-id='data.id' ></a>" + "</td>" +
+                        "<td>"+ "<a class='showDelConfirm btn btn-danger fa fa-trash' id='#deleteCom' data-id='data.id' ></a>" + "</td>" +
                         "</tr>")
                 },
                 // dataType: 'html',

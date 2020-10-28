@@ -47,8 +47,11 @@ class ComputerController extends Controller
     }
 
     public function delete($id){
-        Computer::destroy($id);
-        return redirect()->route('computer.index');
+//       $computer = Computer::destroy($id);
+
+        $computer = Computer::findOrFail($id);
+        $computer->delete();
+
 //
 //        return response()->json([
 //            'success' => 'Record has been deleted successfully!'
