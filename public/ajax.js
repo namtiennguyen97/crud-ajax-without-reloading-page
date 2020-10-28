@@ -16,7 +16,7 @@ $('#addComputerModal').click(function (e){
                "<td>"+ data.computer_color+ "</td>" +
                "<td>"+ data.vendor+ "</td>" +
                "<td>"+ data.price+ "</td>" +
-               "<td>"+ "<a id='deltailCom' class='btn btn-warning fa fa-eye' aria-hidden='true' data-id='data.id' data-toggle='modal' data-target='#detail'></a>" + "</td>" +
+               "<td>"+ "<a id='detailCom' class='btn btn-warning fa fa-eye' aria-hidden='true' data-id='data.id' data-toggle='modal' data-target='#computerDetail'></a>" + "</td>" +
                "<td>"+"<a id='#updateComputer' class='btn btn-success fa fa-pencil-square-o' data-id='data.id' data-toggle='modal' data-target='#modalUpdate'></a>" + "</td>" +
                "<td>"+ "<a class='btn btn-danger fa fa-trash' id='#deleteCom' data-id='data.id' href='{{route('computer.delete', data.id)}}'></a>" + "</td>" +
                "</tr>")
@@ -33,21 +33,13 @@ $('#addComputerModal').click(function (e){
 
 
 //show detail information
+$(document).ready(function (){
+    $('#showDetail').click(function (){
+        $('#computerDetail').modal('show');
 
-    $('#detailCom').click(function (){
-        $('#detail').modal('show');
-        let id = $('#detailCom').val(data-id);
-        $.ajax({
-            url: '/show/'+ id,
-            type: 'get',
-            data: {
-                'id': id
-            },
-            success: function (id){
-                console.log(id);
-            }
-        })
     });
+});
+
 
 
 //edit data

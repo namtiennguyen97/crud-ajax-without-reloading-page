@@ -31,7 +31,7 @@ Computer available now: {{count($computer)}}
         <td>{{$value->computer_color}}</td>
         <td>{{$value->vendor}}</td>
         <td>{{$value->price}}</td>
-        <td><a id="detailCom" class="btn btn-warning fa fa-eye" aria-hidden="true" data-id="{{$value->id}}" data-toggle="modal" data-target="#detail" ></a></td>
+        <td><a id="showDetail" class="btn btn-warning fa fa-eye" aria-hidden="true" data-id="{{$value->id}}" data-toggle='modal' data-target='#computerDetail'></a></td>
         <td><a id="updateComputer" class="btn btn-success fa fa-pencil-square-o" data-id="{{$value->id}}" data-toggle="modal" data-target="#modalUpdate"></a></td>
         <td><a class="btn btn-danger fa fa-trash" href="{{route('computer.delete', $value->id)}}" data-id="{{$value->id}}" id="deleteCom"></a></td>
     </tr>
@@ -202,10 +202,8 @@ Computer available now: {{count($computer)}}
 
 
 {{--show detail modal--}}
-<!-- Button trigger modal -->
-
 <!-- Modal -->
-<div class="modal fade" id="detail" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="computerDetail" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
