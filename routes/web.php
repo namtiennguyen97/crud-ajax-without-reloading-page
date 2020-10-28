@@ -19,6 +19,6 @@ use Illuminate\Support\Facades\Route;
     Route::get('{id}/edit',[\App\Http\Controllers\ComputerController::class,'edit'])->name('computer.edit');
     Route::post('{id}/edit',[\App\Http\Controllers\ComputerController::class, 'update'])->name('computer.update');
     Route::get('/delete/{id}',[\App\Http\Controllers\ComputerController::class, 'delete'])->name('computer.delete');
-//    Route::get('/show/{id}',[\App\Http\Controllers\ComputerController::class, 'show']);
+    Route::get('/show/{id}',[\App\Http\Controllers\ComputerController::class, 'show']);
 
 

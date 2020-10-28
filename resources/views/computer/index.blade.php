@@ -31,8 +31,8 @@ Computer available now: {{count($computer)}}
         <td>{{$value->computer_color}}</td>
         <td>{{$value->vendor}}</td>
         <td>{{$value->price}}</td>
-        <td><a id="showDetail" class="btn btn-warning fa fa-eye" aria-hidden="true" data-id="{{$value->id}}" data-toggle='modal' data-target='#computerDetail'></a></td>
-        <td><a id="updateComputer" class="btn btn-success fa fa-pencil-square-o" data-id="{{$value->id}}" data-toggle="modal" data-target="#modalUpdate"></a></td>
+        <td><a class="showDetail btn btn-warning fa fa-eye" aria-hidden="true" data-id="{{$value->id}}"></a></td>
+        <td><a class="updateComputer btn btn-success fa fa-pencil-square-o" data-id="{{$value->id}}" ></a></td>
         <td><a class="btn btn-danger fa fa-trash" href="{{route('computer.delete', $value->id)}}" data-id="{{$value->id}}" id="deleteCom"></a></td>
     </tr>
     @endforeach
@@ -222,5 +222,4 @@ Computer available now: {{count($computer)}}
     </div>
 </div>
 <script src="{{asset('ajax.js')}}"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 @endsection

@@ -32,10 +32,16 @@ $('#addComputerModal').click(function (e){
 });
 
 
-//show detail information
+// show detail information
 $(document).ready(function (){
-    $('#showDetail').click(function (){
+    $('.showDetail').click(function (data){
         $('#computerDetail').modal('show');
+        let id = $('#showDetail').val($(this).data('id'));
+        $.ajax({
+            url: 'show/'+ id,
+            type: 'get',
+
+        })
 
     });
 });
@@ -43,7 +49,7 @@ $(document).ready(function (){
 
 
 //edit data
-$('#updateComputer').click(function (){
+$('.updateComputer').click(function (){
     $('#modalUpdate').modal('show');
-    $('#nameUpdate').val($(this).data('name'));
+
 });
