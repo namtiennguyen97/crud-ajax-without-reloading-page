@@ -111,8 +111,8 @@ Computer available now: {{count($computer)}}
                             <td><input class="form-control" type="number" id="price" name="price"></td>
                         </tr>
                     </table>
-                    <button type="submit" value="Add" id="addComputerModal" class="btn btn-success fa fa-plus" aria-hidden="true"></button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" value="Add" id="addComputerModal" class="btn btn-success fa fa-plus" aria-hidden="true"> ADD</button>
+                    <button type="button" class="fa fa-times btn btn-danger" data-dismiss="modal"> Cancel</button>
 
                 </form>
 

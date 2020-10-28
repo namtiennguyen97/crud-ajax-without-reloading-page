@@ -35,13 +35,18 @@ $('#addComputerModal').click(function (e){
 // show detail information
 $(document).ready(function (){
     $('.showDetail').click(function (data){
+        let id = $('.showDetail').val($(this).data('id'));
         $('#computerDetail').modal('show');
-        let id = $('#showDetail').val($(this).data('id'));
         $.ajax({
-            url: 'show/'+ id,
-            type: 'get',
-
-        })
+           url: 'show'+ id,
+           type: 'get',
+            data: {
+              id : "id"
+            },
+            success: function (data){
+               $('.modal-body').html(data);
+            }
+        });
 
     });
 });
