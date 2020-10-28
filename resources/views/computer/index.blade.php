@@ -69,7 +69,7 @@ Computer available now: {{count($computer)}}
 </a>
 {{--// form modal Add--}}
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -222,4 +222,38 @@ Computer available now: {{count($computer)}}
     </div>
 </div>
 <script src="{{asset('ajax.js')}}"></script>
+
+
+    <script>
+        $('#addComputerModal').click(function (e){
+            e.preventDefault();
+            $.ajax({
+                url: '{{route('computer.store')}}',
+                type: 'post',
+                data: $('#addFormModal').serialize(),
+                success: function (data){
+                    $('#mainTable').append("<tr>" +
+                        "<td>"+  "</td>" +
+                        "<td>"+ data.id+ "</td>" +
+                        "<td>"+ data.name+ "</td>" +
+                        "<td>"+ data.computer_id+ "</td>" +
+                        "<td>"+ data.computer_ip+ "</td>" +
+                        "<td>"+ data.computer_color+ "</td>" +
+                        "<td>"+ data.vendor+ "</td>" +
+                        "<td>"+ data.price+ "</td>" +
+                        "<td>"+ "<a id='detailCom' class='btn btn-warning fa fa-eye' aria-hidden='true' data-id='data.id' data-toggle='modal' data-target='#computerDetail'></a>" + "</td>" +
+                        "<td>"+"<a id='#updateComputer' class='btn btn-success fa fa-pencil-square-o' data-id='data.id' data-toggle='modal' data-target='#modalUpdate'></a>" + "</td>" +
+                        "<td>"+ "<a class='btn btn-danger fa fa-trash' id='#deleteCom' data-id='data.id' ></a>" + "</td>" +
+                        "</tr>")
+                },
+                // dataType: 'html',
+            });
+            // $('#name').val('');
+            // $('#computer_id').val('');
+            // $('#computer_ip').val('');
+            // $('#computer_color').val('');
+            // $('#vendor').val('');
+            // $('#price').val('');
+        });
+    </script>
 @endsection

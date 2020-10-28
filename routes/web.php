@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
     Route::get('/',[\App\Http\Controllers\ComputerController::class,'index'])->name('computer.index');
-    Route::post('/create',[\App\Http\Controllers\ComputerController::class, 'addModal']);
+    Route::post('/create',[\App\Http\Controllers\ComputerController::class, 'addModal'])->name('computer.store');
     Route::get('/create',[\App\Http\Controllers\ComputerController::class, 'create'])->name('computer.create');
     Route::get('{id}/edit',[\App\Http\Controllers\ComputerController::class,'edit'])->name('computer.edit');
     Route::post('{id}/edit',[\App\Http\Controllers\ComputerController::class, 'update'])->name('computer.update');
