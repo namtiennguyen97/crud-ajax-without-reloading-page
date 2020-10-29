@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="306bd5b4-e0d5-4231-b937-e653aff0e0e6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ComputerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ComputerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Computer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Computer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_25_163335_create_table_computer.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_25_163335_create_table_computer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/ajax.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/computer/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/computer/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +171,7 @@
       <workItem from="1603769499599" duration="19377000" />
       <workItem from="1603871587054" duration="8689000" />
       <workItem from="1603985304700" duration="5743000" />
-      <workItem from="1603977683223" duration="494000" />
+      <workItem from="1603977683223" duration="1982000" />
     </task>
     <servers />
   </component>

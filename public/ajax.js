@@ -7,17 +7,17 @@
 
 
     $('.showDetail').click(function (data){
-        let com_id = $(this).data('id');
+        let id = $(this).data('id');
         let com_name = $(this).data('name');
         let com_desc =$(this).data('desc');
         $('#computerDetail').modal('show');
         $.ajax({
-           url: 'show/'+ com_id,
+           url: 'show/'+ id,
            type: 'get',
             beforeSend: function (){
-              $('.modal-title').text('Computer Id: '+ com_id);
-              $('.modal-body').text('Computer Name: '+ com_name);
-              $('.modal-footer').text('About this computer: '+ '<br>'+ com_desc);
+              $('.detailTitle').text('Computer Id: '+ id);
+              $('.detailBody').text('Computer Name: '+ com_name);
+              $('.detailFooter').text('About this computer: '+ '<br>'+ com_desc);
             },
             success: function (data){
                console.log('success');
@@ -31,24 +31,30 @@
 
 
 //edit data
-
+// let id;
+// let com_name;
+// let com_id;
+// let com_ip;
+// let com_color;
+// let vendor;
+// let price;
+// let desc;
 
     $('.updateComputer').click(function (){
-
+        //  id = $(this).data('id');
+        //  com_name = $(this).data('name');
+        // com_id = $(this).data('computer_id');
+        // com_ip = $(this).data('computer_ip');
+        //  com_color = $(this).data('computer_color');
+        //  vendor = $(this).data('vendor');
+        //  price = $(this).data('price');
+        //  desc = $(this).data('desc');
+        $('.nameUpdate').val(id);
         $('#modalUpdate').modal('show');
 
     });
     $('#confirmUpdate').click(function (){
 
-        let id = $(this).data('id');
-        let com_name = $(this).data('name');
-        let com_id = $(this).data('computer_id');
-        let com_ip = $(this).data('computer_ip');
-        let com_color = $(this).data('computer_color');
-        let vendor = $(this).data('vendor');
-        let price = $(this).data('price');
-        let desc = $(this).data('desc');
-        $('#nameUpdate').val(com_name);
         $.ajax({
             url: 'edit/' + id,
             type: 'post',
