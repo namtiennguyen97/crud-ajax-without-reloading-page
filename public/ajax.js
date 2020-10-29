@@ -40,34 +40,7 @@
 // let price;
 // let desc;
 
-    $('.updateComputer').click(function (){
-        //  id = $(this).data('id');
-        //  com_name = $(this).data('name');
-        // com_id = $(this).data('computer_id');
-        // com_ip = $(this).data('computer_ip');
-        //  com_color = $(this).data('computer_color');
-        //  vendor = $(this).data('vendor');
-        //  price = $(this).data('price');
-        //  desc = $(this).data('desc');
-        $('.nameUpdate').val(id);
-        $('#modalUpdate').modal('show');
 
-    });
-    $('#confirmUpdate').click(function (){
-
-        $.ajax({
-            url: 'edit/' + id,
-            type: 'post',
-            data: $('#formUpdate').serialize(),
-            updateWaiting: function (){
-              $('#confirmUpdate').text('Updating...');
-            },
-            success: function (){
-
-            }
-
-        });
-    });
 
 
 //Delete data
