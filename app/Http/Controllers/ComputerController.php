@@ -31,7 +31,7 @@ class ComputerController extends Controller
     }
     public function update(Request $request, $id){
         Computer::find($id)->update($request->all());
-        return redirect()->route('computer.index');
+
     }
 
 

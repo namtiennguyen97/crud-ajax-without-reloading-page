@@ -15,6 +15,7 @@ Computer available now: {{count($computer)}}
         <th scope="col">Color</th>
         <th scope="col">Vendor</th>
         <th scope="col">Price</th>
+        <th scope="col">Desc</th>
         <th scope="col">Detail</th>
         <th scope="col">Edit/Update</th>
         <th scope="col">Delete</th>
@@ -31,8 +32,10 @@ Computer available now: {{count($computer)}}
         <td>{{$value->computer_color}}</td>
         <td>{{$value->vendor}}</td>
         <td>{{$value->price}}</td>
-        <td><a class="showDetail btn btn-warning fa fa-eye" aria-hidden="true" data-id="{{$value->id}}"></a></td>
-        <td><a class="updateComputer btn btn-success fa fa-pencil-square-o" data-id="{{$value->id}}" ></a></td>
+        <td>{{$value->desc}}</td>
+        <td><a class="showDetail btn btn-warning fa fa-eye" aria-hidden="true" data-id="{{$value->id}}" data-name="{{$value->name}}" data-desc="{{$value->desc}}"></a></td>
+        <td><a class="updateComputer btn btn-success fa fa-pencil-square-o" data-id="{{$value->id}}" data-computer_id="{{$value->computer_id}}" data-computer_ip="{{$value->computer_ip}}" data-computer_color="{{$value->computer_color}}"
+            data-vendor="{{$value->vendor}}" data-price="{{$value->price}}" data-desc="{{$value->desc}}"></a></td>
         <td><a class="showDelConfirm btn btn-danger fa fa-trash" data-id="{{$value->id}}" id="showConfirmDel"></a></td>
     </tr>
     @endforeach
@@ -61,30 +64,36 @@ Computer available now: {{count($computer)}}
                         <tr>
                             <th scope="col">Name</th>
                         </tr>
-                        <tr><td><input class="form-control" type="text" id="name" name="name"></td></tr>
+                        <tr><td><input placeholder="Name/vendor computer..." class="form-control" type="text" name="name"></td></tr>
                         <tr>
                             <th scope="col">Computer ID</th>
                         </tr>
-                        <tr><td><input class="form-control" type="number" id="computer_id" name="computer_id"></td></tr>
+                        <tr><td><input placeholder="Computer ID" class="form-control" type="number"  name="computer_id"></td></tr>
 
                         <tr>
                             <th scope="col">Computer IP</th>
                         </tr>
-                        <tr><td><input class="form-control" type="number" id="computer_ip" name="computer_ip"></td></tr>
+                        <tr><td><input placeholder="Computer Ip..." class="form-control" type="number"  name="computer_ip"></td></tr>
                         <tr>
                             <th scope="col">Color</th>
                         </tr>
 
-                        <tr><td><input class="form-control" type="text" id="computer_color" name="computer_color"></td></tr>
+                        <tr><td><input placeholder="Computer color..." class="form-control" type="text"  name="computer_color"></td></tr>
                         <tr>
                             <th scope="col">Vendor</th>
                         </tr>
-                        <tr> <td><input class="form-control" type="text" id="vendor" name="vendor"></td></tr>
+                        <tr> <td><input placeholder="Input the vendor...." class="form-control" type="text" name="vendor"></td></tr>
                         <tr>
                             <th scope="col">Price</th>
                         </tr>
                         <tr>
-                            <td><input class="form-control" type="number" id="price" name="price"></td>
+                            <td><input placeholder="Input price..." class="form-control" type="number"  name="price"></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">About Computer desc</th>
+                        </tr>
+                        <tr>
+                            <td><textarea placeholder="Input something about this computer..." class="form-control" id="desc" name="desc"></textarea></td>
                         </tr>
                     </table>
                     <button type="submit" value="Add" id="addComputerModal" class="btn btn-success fa fa-plus" aria-hidden="true"> ADD</button>
@@ -113,13 +122,13 @@ Computer available now: {{count($computer)}}
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form-group" method="post" action="">
+                <form class="form-group" id="formUpdate" method="post">
                     @csrf
                     <table border="1px" class="table table-dark">
                         <tr>
                             <th scope="col">Name</th>
                         </tr>
-                        <tr><td><input class="form-control" type="text" name="name" id="nameUpdate" value=""></td></tr>
+                        <tr><td><input class="form-control" type="text" name="nameUpdate" id="nameUpdate"  value=""></td></tr>
                         <tr>
                             <th scope="col">ID</th>
                         </tr>
@@ -145,7 +154,7 @@ Computer available now: {{count($computer)}}
                             <td><input class="form-control" type="number" name="price" value=""></td>
                         </tr>
                     </table>
-                    <input type="submit" value="Add" class="btn btn-success">
+                    <input type="submit" value="Save" class="btn btn-success" id="confirmUpdate" name="confirmUpdate">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </form>
             </div>
@@ -217,6 +226,7 @@ Computer available now: {{count($computer)}}
                         "<td>"+ data.computer_color+ "</td>" +
                         "<td>"+ data.vendor+ "</td>" +
                         "<td>"+ data.price+ "</td>" +
+                        "<td>"+ data.desc+ "</td>" +
                         "<td>"+ "<a id='detailCom' class='btn btn-warning fa fa-eye' aria-hidden='true' data-id='data.id' data-toggle='modal' data-target='#computerDetail'></a>" + "</td>" +
                         "<td>"+"<a id='#updateComputer' class='btn btn-success fa fa-pencil-square-o' data-id='data.id' data-toggle='modal' data-target='#modalUpdate'></a>" + "</td>" +
                         "<td>"+ "<a class='showDelConfirm btn btn-danger fa fa-trash' id='#deleteCom' data-id='data.id' ></a>" + "</td>" +
@@ -231,5 +241,35 @@ Computer available now: {{count($computer)}}
             // $('#vendor').val('');
             // $('#price').val('');
         });
+
+
+
+        $(document).ready(function (){
+            let com_id;
+
+            $('.showDelConfirm').click(function (){
+                com_id = $(this).data('id');
+                $('#confirmDeletion').modal('show');
+            });
+            $('#confirmDelete').click(function (){
+                let table = $('#mainTable').html();
+                $.ajax({
+                    url: 'delete/'+ com_id,
+                    beforeSend: function (){
+                        $('#confirmDelete').text('Deleting...');
+                    },
+                    success: function (data){
+                        setTimeout(function (){
+                            $('#confirmDeletion').modal('show');
+                            // $('#mainTable').html(location.reload());
+                            location.reload();
+                            // window.location.reload();
+                        }, 1000);
+                    }
+
+                });
+            });
+        });
     </script>
+
 @endsection

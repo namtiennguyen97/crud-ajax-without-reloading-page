@@ -13,6 +13,6 @@ class Computer extends Model
     use HasFactory;
     public $table='table_computer';
     public $fillable = [
-      'name','computer_id','computer_ip','computer_color','vendor','price'
+      'name','computer_id','computer_ip','computer_color','vendor','price','desc'
     ];
 }

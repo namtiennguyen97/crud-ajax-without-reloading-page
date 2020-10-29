@@ -21,6 +21,7 @@ class CreateTableComputer extends Migration
             $table->string('computer_color');
             $table->string('vendor');
             $table->integer('price');
+            $table->text('desc');
             $table->timestamps();
         });
     }
