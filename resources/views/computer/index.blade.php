@@ -42,7 +42,7 @@
                        data-vendor="{{$value->vendor}}" data-price="{{$value->price}}" data-desc="{{$value->desc}}"></a>
                 </td>
                 <td><a class="showDelConfirm btn btn-danger fa fa-trash" data-id="{{$value->id}}"
-                       id="showConfirmDel"></a></td>
+                       ></a></td>
             </tr>
         @endforeach
     </table>
@@ -149,35 +149,38 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-group" id="formUpdate" method="post">
+                    <form class="form-group" id="formUpdate" role="form">
                         @csrf
                         <table border="1px" class="table table-dark">
                             <tr>
                                 <th scope="col">Name</th>
                             </tr>
                             <tr>
-                                <td><input class="nameUpdate form-control" type="text" name="nameUpdate" id="nameUpdate"
+                                <td><input class="nameUpdate form-control" type="text" name="name"
                                            value=""></td>
                             </tr>
                             <tr>
                                 <th scope="col">ID</th>
                             </tr>
                             <tr>
-                                <td><input class="computer_id form-control" type="number" name="computer_id" value=""></td>
+                                <td><input class="computer_id form-control" type="number" name="computer_id" value="">
+                                </td>
                             </tr>
 
                             <tr>
                                 <th scope="col">IP</th>
                             </tr>
                             <tr>
-                                <td><input class="computer_ip form-control" type="number" name="computer_ip" value=""></td>
+                                <td><input class="computer_ip form-control" type="number" name="computer_ip" value="">
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="col">Color</th>
                             </tr>
 
                             <tr>
-                                <td><input class="computer_color form-control" type="text" name="computer_color" value=""></td>
+                                <td><input class="computer_color form-control" type="text" name="computer_color"
+                                           value=""></td>
                             </tr>
                             <tr>
                                 <th scope="col">Vendor</th>
@@ -195,7 +198,7 @@
                                 <th scope="col">Desc</th>
                             </tr>
                             <tr>
-                                <td><textarea class="desc form-control"  name="price" value=""></textarea></td>
+                                <td><textarea class="desc form-control" name="desc" value=""></textarea></td>
                             </tr>
                         </table>
                         <input type="submit" value="Save" class="btn btn-success" id="confirmUpdate"
@@ -256,55 +259,18 @@
 
     {{--Script add--}}
     <script>
-        $('#addComputerModal').click(function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: '{{route('computer.store')}}',
-                type: 'post',
-                data: $('#addFormModal').serialize(),
-                success: function (data) {
-                    $('#mainTable').append("<tr>" +
-                        "<td>" + "</td>" +
-                        "<td>" + data.id + "</td>" +
-                        "<td>" + data.name + "</td>" +
-                        "<td>" + data.computer_id + "</td>" +
-                        "<td>" + data.computer_ip + "</td>" +
-                        "<td>" + data.computer_color + "</td>" +
-                        "<td>" + data.vendor + "</td>" +
-                        "<td>" + data.price + "</td>" +
-                        "<td>" + data.desc + "</td>" +
-                        "<td>" + "<a id='detailCom' class='btn btn-warning fa fa-eye' aria-hidden='true' data-id='data.id' data-toggle='modal' data-target='#computerDetail'></a>" + "</td>" +
-                        "<td>" + "<a id='#updateComputer' class='btn btn-success fa fa-pencil-square-o' data-id='data.id' data-toggle='modal' data-target='#modalUpdate'></a>" + "</td>" +
-                        "<td>" + "<a class='showDelConfirm btn btn-danger fa fa-trash' id='#deleteCom' data-id='data.id' ></a>" + "</td>" +
-                        "</tr>")
-                },
-                // dataType: 'html',
-            });
-            // $('#name').val('');
-            // $('#computer_id').val('');
-            // $('#computer_ip').val('');
-            // $('#computer_color').val('');
-            // $('#vendor').val('');
-            // $('#price').val('');
-        });
 
 
         $(document).ready(function () {
-            let com_id;
-            let computer_id;
-            let com_name;
-            let com_ip;
-            let com_color;
-            let vendor;
-            let price;
-            let desc;
+            //delete
 
+            let com_id;
             $('.showDelConfirm').click(function () {
                 com_id = $(this).data('id');
                 $('#confirmDeletion').modal('show');
             });
             $('#confirmDelete').click(function () {
-                let table = $('#mainTable').html();
+
                 $.ajax({
                     url: 'delete/' + com_id,
                     beforeSend: function () {
@@ -322,18 +288,69 @@
                 });
             });
 
+            //create data
 
+            $('#addComputerModal').click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: 'create',
+                    type: 'post',
+                    data: $('#addFormModal').serialize(),
+                    success: function (data) {
+                        $('#mainTable').append("<tr>" +
+                            "<td>" + "</td>" +
+                            "<td>" + data.id + "</td>" +
+                            "<td>" + data.name + "</td>" +
+                            "<td>" + data.computer_id + "</td>" +
+                            "<td>" + data.computer_ip + "</td>" +
+                            "<td>" + data.computer_color + "</td>" +
+                            "<td>" + data.vendor + "</td>" +
+                            "<td>" + data.price + "</td>" +
+                            "<td>" + data.desc + "</td>" +
+                            "<td>" + "<a  class='showDetail btn btn-warning fa fa-eye' aria-hidden='true' data-id='data.id' data-name='data.name' data-desc='data.desc'></a>" + "</td>" +
+                            "<td>" + "<a class='updateComputer btn btn-success fa fa-pencil-square-o' data-id='data.id' data-name='data.name' data-computer_id='data.computer_id'" +
+                            " data-computer_ip='data.computer_ip' data-computer_color='data.computer_color' data-vendor='data.vendor' data-price='data.price' data-desc='data.desc'></a>" + "</td>" +
+                            "<td>" + "<a class='showDelConfirm btn btn-danger fa fa-trash' data-id='data.id' ></a>" + "</td>" +
+                            "</tr>")
+                    },
+                });
+            });
 
+            //show detail data
 
+            $('.showDetail').click(function (data){
 
-            $('.updateComputer').click(function (){
-                computer_id = $(this).data('computer_id');
-                com_name = $(this).data('name');
-                com_ip = $(this).data('computer_ip');
-                 com_color = $(this).data('computer_color');
-                 vendor = $(this).data('vendor');
-                 price = $(this).data('price');
-                 desc = $(this).data('desc');
+                let id = $(this).data('id');
+                let com_name = $(this).data('name');
+                let com_desc =$(this).data('desc');
+                $('#computerDetail').modal('show');
+                $.ajax({
+                    url: 'show/'+ id,
+                    type: 'get',
+                    beforeSend: function (){
+                        $('.detailTitle').text('Computer Id: '+ id);
+                        $('.detailBody').text('Computer Name: '+ com_name);
+                        $('.detailFooter').text('About this computer: '+ com_desc);
+                    },
+                    success: function (data){
+                        console.log('success');
+                        // $('.modal-body').html(data);
+                    }
+                });
+            });
+
+            //edit data
+            //1- get values
+            $('.updateComputer').click(function (a) {
+                a.preventDefault();
+                com_id = $(this).data('id');
+                let computer_id = $(this).data('computer_id');
+                let com_name = $(this).data('name');
+                let com_ip = $(this).data('computer_ip');
+                let com_color = $(this).data('computer_color');
+                let vendor = $(this).data('vendor');
+                let price = $(this).data('price');
+                let desc = $(this).data('desc');
                 $('.nameUpdate').val(com_name);
                 $('.computer_id').val(computer_id);
                 $('.computer_ip').val(com_ip);
@@ -344,21 +361,27 @@
                 $('#modalUpdate').modal('show');
 
             });
-            $('#confirmUpdate').click(function (){
+            // start to update
+
+            $('#confirmUpdate').click(function (e) {
+                e.preventDefault();
+                let  updateId = $(this).data('id');
+
 
                 $.ajax({
-                    url: 'edit/' + id,
+                    url: 'edit/' + com_id,
                     type: 'post',
                     data: $('#formUpdate').serialize(),
-                    updateWaiting: function (){
-                        $('#confirmUpdate').text('Updating...');
-                    },
-                    success: function (){
-
+                    // updateWaiting: function () {
+                    //     $('#confirmUpdate').text('Updating...');
+                    // },
+                    success: function (data) {
+                        console.log(data);
                     }
 
                 });
             });
+
         });
     </script>
 

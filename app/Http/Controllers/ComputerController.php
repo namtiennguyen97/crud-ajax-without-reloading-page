@@ -31,6 +31,12 @@ class ComputerController extends Controller
     }
     public function update(Request $request, $id){
         Computer::find($id)->update($request->all());
+//        $computer = Computer::findOrFail($id);
+//        dd($computer);
+
+//        $computer = Computer::findOrFail($id);
+
+
 
     }
 
