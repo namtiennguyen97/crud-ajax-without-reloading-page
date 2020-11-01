@@ -5,7 +5,7 @@
         Computer available now: {{count($computer)}}
     </div>
     <input type="text">
-    <table border="1px" id="mainTable" class="table table-dark">
+    <table border="1px" id="mainTable" class="display table table-bordered table-striped" style="width: 100%">
         <tr>
             <th scope="col">STT</th>
             <th scope="col">ID</th>
@@ -341,8 +341,8 @@
 
             //edit data
             //1- get values
-            $('.updateComputer').click(function (a) {
-                a.preventDefault();
+            $('.updateComputer').click(function () {
+
                 com_id = $(this).data('id');
                 let computer_id = $(this).data('computer_id');
                 let com_name = $(this).data('name');
@@ -364,24 +364,24 @@
             // start to update
 
             $('#confirmUpdate').click(function (e) {
+
                 e.preventDefault();
-                let  updateId = $(this).data('id');
-
-
                 $.ajax({
                     url: 'edit/' + com_id,
                     type: 'post',
                     data: $('#formUpdate').serialize(),
-                    // updateWaiting: function () {
+                    // beforeSend: function () {
                     //     $('#confirmUpdate').text('Updating...');
                     // },
+
                     success: function (data) {
+                        $('#mainTable').DataTable().ajax.reload();
                         console.log(data);
                     }
 
                 });
             });
-
+            $('#mainTable').DataTable();
         });
     </script>
 
