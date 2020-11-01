@@ -375,7 +375,7 @@
                     // },
 
                     success: function (data) {
-                        $('#mainTable').DataTable().ajax.reload();
+                        location.reload();
                         console.log(data);
                     }
 
